@@ -3,6 +3,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css"
 
 
+//
+
+
+let status = document.getElementById('status');
+let statusText = document.getElementById('status-text');
+
+status.onclick = () => {
+    statusText.removeAttribute('disabled');
+    statusText.removeAttribute('readonly');
+    statusText.focus()
+    statusText.selectionStart = statusText.value.length;
+
+};
+
+console.log(status);
+
+
+// Работа с JSON
+
 const xhrJSON = new XMLHttpRequest();
 
 xhrJSON.open('GET', 'cities.json', true);
@@ -43,14 +62,13 @@ xhrJSON.onreadystatechange = function () {
     cities.unshift(cityMax);
 
     for (let key in cities) {
-        console.log(cities[key].city)
         if (typeof (cities[key].city == 'string')) {
             $('#city').append('<option value="' + key.city + '">' + cities[key].city + '</option>');
         }
     }
-
 };
 
+// Работа с сервером
 
 document.querySelector('.btn').onclick = (event) => {
     event.preventDefault();
@@ -68,15 +86,12 @@ document.querySelector('.btn').onclick = (event) => {
     xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) return;
         if (xhr.status !== 200) {
-            // console.log(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+            console.log(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
         } else {
-            // console.log('Response');
             let check = JSON.parse(xhr.responseText); // responseText -- текст ответа.
-
             if (check.password === 'none') {
                 password.classList.add('is-invalid');
             } else if (check.password === 'shortPassword') {
-                console.log('Маленький');
                 password.classList.add('is-invalid');
                 passInvalidFeedback.textContent = 'Используйте не менее 5 символов';
             } else {

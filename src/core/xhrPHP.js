@@ -5,6 +5,7 @@ document.querySelector('.btn').onclick = (event) => {
     const email = document.getElementById('email');
     const passInvalidFeedback = document.getElementById('enter-password');
     const passAgainInvalidFeedback = document.getElementById('enter-again-password');
+    const emailInvalidFeedback = document.getElementById('enter-email');
     const xhr = new XMLHttpRequest();
 
     xhr.open("GET", 'handling.php?password=' + password.value + '&passwordAgain=' + passwordAgain.value + '&email=' + email.value, true);
@@ -38,9 +39,14 @@ document.querySelector('.btn').onclick = (event) => {
 
             if (check.email === "none") {
                 email.classList.add('is-invalid');
-            } else if (res.email === "success") {
+            } else if (check.email === "success") {
                 email.classList.remove('is-invalid');
                 email.classList.add('is-valid');
+
+            } else if(check.email === 'incorrect') {
+                console.log('Неверный E-mail');
+                email.classList.add('is-invalid');
+                emailInvalidFeedback.textContent = 'Неверный E-mail'
             }
         }
     };

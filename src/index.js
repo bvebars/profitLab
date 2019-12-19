@@ -5,3 +5,4 @@ import "./style.css"
 import './components/status.component'
 import './core/xhrJSON'
 import './core/xhrPHP'
+

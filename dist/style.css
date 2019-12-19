@@ -20,6 +20,15 @@
 
 /*Статус*/
 
+#status {
+    font-size: 12px;
+    color: #0C77BB;
+    margin-top: 15px;
+    float: right;
+    border-bottom: 1px dashed #0C77BB;
+    cursor: pointer;
+}
+
 .form-control {
 resize: none;
 }

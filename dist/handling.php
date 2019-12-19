@@ -1,15 +1,23 @@
 <?php
 
 $password = $_GET['password'];
+$passwordAgain = $_GET['passwordAgain'];
 $email = $_GET['email'];
 
-$arrayName = array('password' => '', 'email' => '');
+$arrayName = array('password' => '', 'passwordAgain' => '', 'email' => '');
 
 if ($password == '') {
     $arrayName['password'] = 'none';
 } else if (strlen($password) < 5 ) {
     $arrayName['password'] = 'shortPassword';
 }
+
+if ($password == '') {
+    $arrayName['passwordAgain'] = 'none';
+} else if ($password !== $passwordAgain) {
+    $arrayName['passwordAgain'] = 'unequal';
+}
+
 
 if ($email == '') {
     $arrayName['email'] = 'none';

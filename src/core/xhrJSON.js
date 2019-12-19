@@ -28,7 +28,6 @@ xhrJSON.onreadystatechange = function () {
     for (let key of cities) {
         cityIndex++;
         if (key.population === String(cityMaxNumbers)) {
-            console.log(cityIndex);
             cityMax = key;
             delete cities[cityIndex - 1]
         }

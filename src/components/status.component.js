@@ -9,7 +9,6 @@ status.onclick = () => {
 };
 
 statusText.onblur = function() {
-    console.log('Dsdjl');
     statusText.setAttribute('disabled', '');
     statusText.setAttribute('readonly', '');
     statusText.removeAttribute('readonly');

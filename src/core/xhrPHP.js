@@ -12,11 +12,17 @@ document.querySelector('.btn').onclick = (event) => {
     xhr.send();
 
     xhr.onreadystatechange = function () {
+
+        let pass = false;
+        let passAgain = false;
+        let mail = false;
+
         if (xhr.readyState !== 4) return;
         if (xhr.status !== 200) {
             console.log(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
         } else {
             let check = JSON.parse(xhr.responseText); // responseText -- текст ответа.
+
             if (check.password === 'none') {
                 password.classList.add('is-invalid');
             } else if (check.password === 'shortPassword') {
@@ -25,6 +31,7 @@ document.querySelector('.btn').onclick = (event) => {
             } else {
                 password.classList.remove('is-invalid');
                 password.classList.add('is-valid');
+                pass = true;
             }
 
             if (check.passwordAgain === 'none') {
@@ -35,6 +42,7 @@ document.querySelector('.btn').onclick = (event) => {
             } else {
                 passwordAgain.classList.remove('is-invalid');
                 passwordAgain.classList.add('is-valid');
+                passAgain = true;
             }
 
             if (check.email === "none") {
@@ -42,12 +50,16 @@ document.querySelector('.btn').onclick = (event) => {
             } else if (check.email === "success") {
                 email.classList.remove('is-invalid');
                 email.classList.add('is-valid');
-
+                mail = true;
             } else if(check.email === 'incorrect') {
-                console.log('Неверный E-mail');
                 email.classList.add('is-invalid');
                 emailInvalidFeedback.textContent = 'Неверный E-mail'
             }
+        }
+
+        if (pass === true && passAgain === true && mail === true) {
+            //тут должен быть запрос на API Bitrix
+            console.log('Успешно')
         }
     };
 };
